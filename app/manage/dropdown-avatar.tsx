@@ -13,23 +13,23 @@ import Link from "next/link";
 import { useLogoutMutation } from "@/queries/useAuth";
 import { handleErrorApi } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useAccountProfile } from "@/queries/useAccount";
+import { useGetMeQuery } from "@/queries/useAccount";
 
-const account = {
-  name: "Nguyễn Văn A",
-  avatar: "https://i.pravatar.cc/150",
-};
+// const account = {
+//   name: "Nguyễn Văn A",
+//   avatar: "https://i.pravatar.cc/150",
+// };
 
 export default function DropdownAvatar() {
   const logoutMutation = useLogoutMutation();
   const router = useRouter();
-  const { data } = useAccountProfile();
+  const { data } = useGetMeQuery();
   const profile = data?.payload.data;
 
   const logout = async () => {
     if (logoutMutation.isPending) return;
     try {
-      const result = await logoutMutation.mutateAsync();
+      await logoutMutation.mutateAsync();
       router.push("/");
     } catch (error) {
       handleErrorApi({

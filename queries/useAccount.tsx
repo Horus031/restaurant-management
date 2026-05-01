@@ -3,13 +3,25 @@ import {
   AccountResType,
   AccountType,
 } from "@/schemaValidations/account.schema";
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
 
-export const useAccountProfile = () => {
+export const useGetMeQuery = () => {
   return useQuery(
     queryOptions({
       queryKey: ["account-profile"],
       queryFn: accountApiRequest.getMe,
     }),
   );
+};
+
+export const useUpdateMeMutation = () => {
+  return useMutation({
+    mutationFn: accountApiRequest.updateMe,
+  });
+};
+
+export const useChangePasswordMutation = () => {
+  return useMutation({
+    mutationFn: accountApiRequest.changePasswordV2,
+  });
 };

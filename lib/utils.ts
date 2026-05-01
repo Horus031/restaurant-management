@@ -44,3 +44,9 @@ export const getAccessTokenFromLocalStorage = () =>
 
 export const getRefreshTokenFromLocalStorage = () =>
   localStorage.getItem("refreshToken");
+
+export const setAccessTokenToLocalStorage = (value: string) =>
+  localStorage.setItem("accessToken", value);
+
+export const setRefreshTokenToLocalStorage = (value: string) =>
+  localStorage.setItem("refreshToken", value);
