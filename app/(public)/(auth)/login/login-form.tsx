@@ -16,9 +16,11 @@ import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { useLoginMutation } from "@/queries/useAuth";
 import { handleErrorApi } from "@/lib/utils";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const loginMutation = useLoginMutation();
+  const router = useRouter();
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
     defaultValues: {
@@ -33,6 +35,7 @@ export default function LoginForm() {
     try {
       const result = await loginMutation.mutateAsync(data);
       toast.success("Login Successfully");
+      router.push("/manage/dashboard");
     } catch (error) {
       handleErrorApi({
         error,
